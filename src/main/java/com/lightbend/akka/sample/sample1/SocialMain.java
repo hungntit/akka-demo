@@ -11,27 +11,33 @@ import com.lightbend.akka.sample.Printer;
 import java.io.IOException;
 
 public class SocialMain {
-  public static void main(String[] args) {
-    final ActorSystem system = ActorSystem.create("social");
-    try {
-      //#create-actors
-      final ActorRef man =
-        system.actorOf(Props.create(Man.class), "ClarkKen");
-      final ActorRef woman =
-        system.actorOf(Props.create(Woman.class), "Lana");
-      final ActorRef neighbourMan =
-        system.actorOf(Props.create(Man.class), "NeighBourMan");
 
-      woman.tell(new Person.ILoveYou(Person.Gender.male), man);
-      //#main-send-messages
-      System.out.println(">>> 2 years later <<<");
-      System.in.read();
-      neighbourMan.tell(new Person.FallInLove(woman),ActorRef.noSender());
-      System.out.println(">>> Press ENTER to exit <<<");
-      System.in.read();
-    } catch (IOException ioe) {
-    } finally {
-      system.terminate();
+    private static void wait(int year) {
+        long start = System.currentTimeMillis();
+        while (System.currentTimeMillis() - start < year * 1000) ;
+        System.out.println(String.format(">>> %s years later <<<", year));
+
     }
-  }
+
+    public static void main(String[] args) {
+        final ActorSystem system = ActorSystem.create("social");
+        try {
+            //#create-actors
+            final ActorRef man =
+                    system.actorOf(Props.create(Man.class), "ClarkKen");
+            final ActorRef woman =
+                    system.actorOf(Props.create(Woman.class), "Lana");
+            final ActorRef neighbourMan =
+                    system.actorOf(Props.create(Man.class), "NeighBourMan");
+
+            woman.tell(new Person.ILoveYou(Person.Gender.male), man);
+            //#main-send-messages
+
+            wait(2);
+            neighbourMan.tell(new Person.FallInLove(woman), ActorRef.noSender());
+            wait(10);
+        } finally {
+            system.terminate();
+        }
+    }
 }

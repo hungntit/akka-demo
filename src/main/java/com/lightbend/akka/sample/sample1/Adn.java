@@ -33,16 +33,15 @@ public class Adn {
 
     private static double getPercentage(long[] arrayA, long[] arrayB) {
         List<Long> listA = toList(arrayA);
-        List<Long> listB = toList(arrayA);
+        List<Long> listB = toList(arrayB);
         double percentage=0;
         for(int i = listA.size() - 1; i>=0 ; i--) {
-            for(int j = listB.size() - 1; j>=0 ; j--) {
-                if(listA.get(i).longValue() == listB.get(j).longValue()) {
-                    percentage++;
-                    listA.remove(i);
-                    listB.remove(j);
-                }
+            int idxOfB = listB.indexOf(listA.get(i));
+            if(idxOfB > -1) {
+                percentage ++;
+                listB.remove(idxOfB);
             }
+
         }
         System.out.println("Percent: " + percentage);
         return (percentage/arrayA.length)*100; /*return the amount of times over the length times 100*/

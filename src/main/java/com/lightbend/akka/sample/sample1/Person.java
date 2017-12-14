@@ -133,4 +133,5 @@ public abstract class Person extends AbstractActor {
             this.girl = girl;
         }
     }
+
 }

@@ -12,6 +12,6 @@ public class Child extends Person {
 
     @Override
     public void sayHello() {
-        System.out.println("Waaa! Waaa! Waaa!");
+        System.out.println("\uD83D\uDC76: Waaa! Waaa! Waaa!");
     }
 }

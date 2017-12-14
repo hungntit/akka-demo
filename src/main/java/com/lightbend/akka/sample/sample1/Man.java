@@ -47,6 +47,12 @@ public class Man extends Person {
     }
 
     @Override
+    public void postStop() throws Exception {
+        System.out.println(String.format("%s:Good bye all!", getSelf().path().name()));
+        super.postStop();
+    }
+
+    @Override
     public void sayHello() {
         System.out.println(String.format("I'm %s. I'm strong", getSelf().path().name()));
     }
