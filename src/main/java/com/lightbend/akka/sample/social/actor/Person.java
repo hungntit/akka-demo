@@ -1,17 +1,18 @@
-package com.lightbend.akka.sample.sample1;
+package com.lightbend.akka.sample.social.actor;
 
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
+import com.lightbend.akka.sample.social.common.Adn;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public abstract class Person extends AbstractActor {
-    Adn adn;
-    Gender gender;
-    ActorRef lover;
-    List<ActorRef> children = new ArrayList<>();
+    public Adn adn;
+    public Gender gender;
+    public ActorRef lover;
+    public List<ActorRef> children = new ArrayList<>();
 
     @Override
     public void postStop() throws Exception {
@@ -22,11 +23,7 @@ public abstract class Person extends AbstractActor {
     @Override
     public Receive createReceive() {
         return receiveBuilder().match(ILoveYou.class, iLoveYou -> {
-            if (!hasLover() && iLoveYou.ownerGender != this.gender) {
-                System.out.println(String.format("%s says: `I love you` to %s", getSender().path().name(), this.getSelf().path().name()));
-                this.lover = getSender();
-                this.lover.tell(new ILoveYou(this.gender), getSelf());
-            }
+            unhandled(iLoveYou);
         }).match(Message.class, message -> {
             System.out.println(String.format("%s receive from %s: %s", this.getSelf().path().name(),
                                                                         getSender().path().name(),
@@ -120,7 +117,7 @@ public abstract class Person extends AbstractActor {
     }
 
     public static class Message {
-        String message;
+        public String message;
 
         Message(String message) {
             this.message = message;
@@ -129,7 +126,7 @@ public abstract class Person extends AbstractActor {
 
     public static class FallInLove{
         ActorRef girl;
-        FallInLove(ActorRef girl) {
+        public FallInLove(ActorRef girl) {
             this.girl = girl;
         }
     }

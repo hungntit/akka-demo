@@ -1,4 +1,4 @@
-package com.lightbend.akka.sample.sample1;
+package com.lightbend.akka.sample.social.common;
 
 import java.util.*;
 

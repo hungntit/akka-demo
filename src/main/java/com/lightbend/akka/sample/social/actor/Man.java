@@ -1,10 +1,8 @@
-package com.lightbend.akka.sample.sample1;
+package com.lightbend.akka.sample.social.actor;
 
 import akka.actor.ActorRef;
 import akka.actor.PoisonPill;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.lightbend.akka.sample.social.common.Adn;
 
 public class Man extends Person {
 

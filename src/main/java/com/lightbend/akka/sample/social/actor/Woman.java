@@ -1,11 +1,8 @@
-package com.lightbend.akka.sample.sample1;
+package com.lightbend.akka.sample.social.actor;
 
 import akka.actor.ActorRef;
 import akka.actor.Props;
-import akka.japi.pf.ReceiveBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.lightbend.akka.sample.social.common.Adn;
 
 public class Woman extends Person {
 

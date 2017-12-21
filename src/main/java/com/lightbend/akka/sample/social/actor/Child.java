@@ -1,6 +1,7 @@
-package com.lightbend.akka.sample.sample1;
+package com.lightbend.akka.sample.social.actor;
 
 import akka.actor.ActorRef;
+import com.lightbend.akka.sample.social.common.Adn;
 
 public class Child extends Person {
     ActorRef father;
